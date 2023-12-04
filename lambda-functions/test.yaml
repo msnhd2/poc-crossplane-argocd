@@ -9,11 +9,11 @@ metadata:
   name: example
 spec:
   forProvider:
-    handler: index.py
-    packageType: Zip
+    handler: lambda_function.lambda_handler
+    #packageType: Zip
     region: us-east-1
     runtime: python3.9
-    s3Bucket: upbound-provider-test-data
-    s3Key: hello-python.zip
+    #s3Bucket: upbound-provider-test-data
+    #s3Key: hello-python.zip
     timeout: 60
     role: arn:aws:iam::626109959667:role/service-role/testetest-role-rdxlo58r
