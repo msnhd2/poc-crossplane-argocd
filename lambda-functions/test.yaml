@@ -13,7 +13,7 @@ spec:
     - variables:
         foo: bar
     s3Bucket: teste-crossplane
-    s3Key: index.py
+    s3Key: index.zip
     handler: index.py
     region: us-east-1
     runtime: python3.9
