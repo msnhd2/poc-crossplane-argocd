@@ -1,0 +1,10 @@
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  name: third
+  annotations:
+    crossplane.io/external-name: https://sqs.us-east-1.amazonaws.com/626109959667/third
+spec:
+  forProvider:
+    name: third
+    region: us-east-1
