@@ -16,10 +16,3 @@ spec:
     s3Bucket: upbound-provider-test-data
     s3Key: hello-python.zip
     timeout: 60
-    vpcConfig:
-      - securityGroupIdSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
-        subnetIdSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
