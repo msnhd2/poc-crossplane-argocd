@@ -12,10 +12,10 @@ spec:
     environment:
     - variables:
         foo: bar
-    s3Bucket: upbound-provider-test-data
-    s3Key: hello-python.zip
+    s3Bucket: teste-crossplane
+    s3Key: index.py
     handler: index.py
-    region: us-west-1
+    region: us-east-1
     runtime: python3.9
     timeout: 60
     role: arn:aws:iam::626109959667:role/service-role/testetest-role-rdxlo58r
