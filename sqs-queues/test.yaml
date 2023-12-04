@@ -4,7 +4,7 @@ metadata:
   name: first-queue
 spec:
   forProvider:
-    name: platformwale-queue
+    name: first-queue
     region: us-east-1
 
 ---
@@ -14,8 +14,8 @@ kind: Queue
 metadata:
   name: second-queue
   annotations:
-    crossplane.io/external-name: https://sqs.us-east-1.amazonaws.com/626109959667/platformwale-queue2
+    crossplane.io/external-name: https://sqs.us-east-1.amazonaws.com/626109959667/second-queue
 spec:
   forProvider:
-    name: platformwale-queue2
+    name: second-queue
     region: us-east-1
