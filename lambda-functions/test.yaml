@@ -1,0 +1,16 @@
+---
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Function
+metadata:
+  name: first-lambda
+  annotations:
+    meta.upbound.io/example-id: lambda/v1beta1/alias
+spec:
+  forProvider:
+    handler: lambda_function.lambda_handler
+    publish: true
+    region: us-east-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_lambda_alias
+    runtime: python3.9
