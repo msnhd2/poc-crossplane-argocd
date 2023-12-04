@@ -10,7 +10,5 @@ spec:
     handler: lambda_function.lambda_handler
     publish: true
     region: us-east-1
-    roleSelector:
-      matchLabels:
-        testing.upbound.io/example-name: test_lambda_alias
+    timeout: 60
     runtime: python3.9
