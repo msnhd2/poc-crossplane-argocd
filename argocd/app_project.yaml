@@ -1,0 +1,73 @@
+# The 'applications-project' AppProject allows a non-admin user to deploy 
+# only Application resources in the 'argocd' namespace.
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: applications-project
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Project for argocd applicatons
+  sourceRepos:
+  - ${URL_REPO}
+
+  #
+  # Allow this project to deploy only to 'argocd' namespace
+  #
+  destinations:
+  - namespace: argocd
+    server: https://kubernetes.default.svc
+  #
+  # Deny all namespace-scoped resources from being created, except for Application
+  #
+  namespaceResourceWhitelist:
+  - group: 'argoproj.io'
+    kind: Application
+---
+# 'sqs-project' is used for actual SQS crossplane resources
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: sqs-project
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Project for deploying crossplane resources to the cluster
+  sourceRepos:
+  - ${URL_REPO}
+
+  # can deploy to any namespace but within the kind cluster only
+  destinations:
+  - namespace: '*'
+    server: https://kubernetes.default.svc   
+
+  # can deploy any SQS resources
+  clusterResourceWhitelist:
+  - group: 'sqs.aws.upbound.io'
+    kind: '*'
+---
+# 'sqs-project' is used for actual SQS crossplane resources
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: lambda-project
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Project for deploying crossplane resources to the cluster
+  sourceRepos:
+  - ${URL_REPO}
+
+  # can deploy to any namespace but within the kind cluster only
+  destinations:
+  - namespace: '*'
+    server: https://kubernetes.default.svc   
+
+  # can deploy any SQS resources
+  clusterResourceWhitelist:
+  - group: 'lambda.aws.upbound.io'
+    kind: '*'

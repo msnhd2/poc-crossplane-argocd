@@ -1,0 +1,28 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: "delaware"
+# configure cluster with containerd registry config dir enabled
+containerdConfigPatches:
+- |-
+  [plugins."io.containerd.grpc.v1.cri".registry]
+    config_path = "/etc/containerd/certs.d"
+nodes:
+- role: control-plane
+  image: kindest/node:v1.25.9@sha256:c08d6c52820aa42e533b70bce0c2901183326d86dcdcbedecc9343681db45161
+  kubeadmConfigPatches:
+  # Enable ingress to run nginx
+  - |
+    kind: InitConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "ingress-ready=true"
+        system-reserved: "cpu=300m,memory=5Mi,ephemeral-storage=1Gi"
+        kube-reserved: "cpu=200m,memory=5Mi,ephemeral-storage=1Gi"
+        eviction-hard: "memory.available<1Gi,nodefs.available<10%"
+  extraPortMappings:
+  - containerPort: 80
+    hostPort: 80
+    protocol: TCP
+  - containerPort: 443
+    hostPort: 443
+    protocol: TCP
